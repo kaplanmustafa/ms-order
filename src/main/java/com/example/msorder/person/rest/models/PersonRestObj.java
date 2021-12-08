@@ -1,17 +1,31 @@
-package com.example.msorder.models;
+package com.example.msorder.person.rest.models;
 
+import com.example.msorder.validation.StartWith;
+
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-public class Person {
+public class PersonRestObj {
 
+    @NotEmpty
+    @Size(min = 2, max = 20)
+    @StartWith("n:")
     private String name;
 
+    @NotEmpty
+    @Size(min = 2, max = 20)
+    @StartWith("s:")
     private String surname;
 
+    @Past
     private LocalDate birthdate;
 
+    @Max(400)
+    @Min(10)
     private int weight;
 
+    @Max(400)
+    @Min(50)
     private int height;
 
     private String number;
@@ -56,14 +70,6 @@ public class Person {
         this.height = height;
     }
 
-    public String getNumber() {
-        return this.number;
-    }
-
-    public void setNumber(final String numberParam) {
-        this.number = numberParam;
-    }
-
     @Override
     public String toString() {
         return "Person{" +
@@ -73,5 +79,13 @@ public class Person {
                 ", weight=" + weight +
                 ", height=" + height +
                 '}';
+    }
+
+    public String getNumber() {
+        return this.number;
+    }
+
+    public void setNumber(final String numberParam) {
+        this.number = numberParam;
     }
 }
