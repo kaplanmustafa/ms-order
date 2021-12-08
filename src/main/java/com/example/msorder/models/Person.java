@@ -1,5 +1,7 @@
 package com.example.msorder.models;
 
+import com.example.msorder.validation.StartWith;
+
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
@@ -7,10 +9,12 @@ public class Person {
 
     @NotEmpty
     @Size(min = 2, max = 20)
+    @StartWith("n:")
     private String name;
 
     @NotEmpty
     @Size(min = 2, max = 20)
+    @StartWith("s:")
     private String surname;
 
     @Past
