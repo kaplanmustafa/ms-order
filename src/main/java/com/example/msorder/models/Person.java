@@ -1,13 +1,27 @@
 package com.example.msorder.models;
 
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class Person {
 
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String name;
+
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String surname;
+
+    @Past
     private LocalDate birthdate;
+
+    @Max(400)
+    @Min(10)
     private int weight;
+
+    @Max(400)
+    @Min(50)
     private int height;
 
     public String getName() {

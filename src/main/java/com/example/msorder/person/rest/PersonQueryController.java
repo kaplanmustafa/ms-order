@@ -1,4 +1,4 @@
-package com.example.msorder.servlet.person.rest;
+package com.example.msorder.person.rest;
 
 import com.example.msorder.models.Person;
 import org.springframework.web.bind.annotation.GetMapping;
