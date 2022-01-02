@@ -15,13 +15,25 @@ import java.util.List;
 @Service
 public class RestaurantMenuClient {
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+    private final EurekaClient eurekaClient;
+    private final RestaurantMenuIntegration restaurantMenuIntegration;
 
     @Autowired
-    EurekaClient eurekaClient;
+    public RestaurantMenuClient(RestTemplate restTemplate, EurekaClient eurekaClient, RestaurantMenuIntegration restaurantMenuIntegration) {
+        this.restTemplate = restTemplate;
+        this.eurekaClient = eurekaClient;
+        this.restaurantMenuIntegration = restaurantMenuIntegration;
+    }
 
     public MenuPriceInfo calculateMenu(final Order order) {
+        Menu menu = new Menu();
+        menu.setMeals(order.getMeals());
+        menu.setMenuName("Menu: " + order.getName() + " " + order.getSurname());
+        return restaurantMenuIntegration.calculate(menu);
+    }
+
+    public MenuPriceInfo calculateMenu1(final Order order) {
         Menu menu = new Menu();
         menu.setMeals(order.getMeals());
         menu.setMenuName("Menu: " + order.getName() + " " + order.getSurname());
