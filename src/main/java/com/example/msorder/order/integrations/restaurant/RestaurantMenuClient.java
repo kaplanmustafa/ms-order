@@ -1,5 +1,6 @@
 package com.example.msorder.order.integrations.restaurant;
 
+import com.example.mscommon.error.feign.MyFeignClientException;
 import com.example.msorder.order.integrations.models.Menu;
 import com.example.msorder.order.integrations.models.MenuPriceInfo;
 import com.example.msorder.order.rest.models.Order;
@@ -26,7 +27,7 @@ public class RestaurantMenuClient {
         this.restaurantMenuIntegration = restaurantMenuIntegration;
     }
 
-    public MenuPriceInfo calculateMenu(final Order order) {
+    public MenuPriceInfo calculateMenu(final Order order) throws MyFeignClientException {
         Menu menu = new Menu();
         menu.setMeals(order.getMeals());
         menu.setMenuName("Menu: " + order.getName() + " " + order.getSurname());

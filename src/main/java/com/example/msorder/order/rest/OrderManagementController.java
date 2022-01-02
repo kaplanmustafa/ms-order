@@ -1,5 +1,6 @@
 package com.example.msorder.order.rest;
 
+import com.example.mscommon.error.feign.MyFeignClientException;
 import com.example.msorder.order.mappers.OrderMappers;
 import com.example.msorder.order.rest.models.OrderRestObj;
 import com.example.msorder.order.services.OrderManagementService;
@@ -17,7 +18,7 @@ public class OrderManagementController {
     private OrderManagementService oms;
 
     @PostMapping("/place")
-    public String place(@RequestBody final OrderRestObj order) {
+    public String place(@RequestBody final OrderRestObj order) throws MyFeignClientException {
         return oms.place(OrderMappers.toOrder(order));
     }
 }
