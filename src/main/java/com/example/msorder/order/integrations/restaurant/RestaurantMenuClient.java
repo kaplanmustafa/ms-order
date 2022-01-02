@@ -7,6 +7,8 @@ import com.example.msorder.order.rest.models.Order;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -27,11 +29,21 @@ public class RestaurantMenuClient {
         this.restaurantMenuIntegration = restaurantMenuIntegration;
     }
 
+    @Retry(name = "restaurantretry", fallbackMethod = "calculateMenuFallback")
+    @CircuitBreaker(name = "cbrestaurant")
     public MenuPriceInfo calculateMenu(final Order order) throws MyFeignClientException {
         Menu menu = new Menu();
         menu.setMeals(order.getMeals());
         menu.setMenuName("Menu: " + order.getName() + " " + order.getSurname());
+        menu.setExtra("Extra");
         return restaurantMenuIntegration.calculate(menu);
+    }
+
+    public MenuPriceInfo calculateMenuFallback(final Order order, Throwable th) {
+        MenuPriceInfo menuPriceInfo = new MenuPriceInfo();
+        menuPriceInfo.setPort(0);
+        menuPriceInfo.setPrice(1000);
+        return menuPriceInfo;
     }
 
     public MenuPriceInfo calculateMenu1(final Order order) {

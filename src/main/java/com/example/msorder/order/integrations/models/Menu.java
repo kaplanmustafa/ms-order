@@ -10,6 +10,8 @@ public class Menu {
 
     private List<Meal> meals;
 
+    private String extra;
+
     public String getMenuName() {
         return menuName;
     }
@@ -24,5 +26,13 @@ public class Menu {
 
     public void setMeals(List<Meal> meals) {
         this.meals = meals;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
     }
 }

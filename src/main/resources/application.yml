@@ -29,3 +29,26 @@ spring:
         retry-on-all-operations: true
   config:
     import: configserver:http://127.0.0.1:8888
+resilience4j:
+  retry:
+    metrics:
+      enabled: true
+    instances:
+      restaurantretry:
+        max-attempts: 2
+        retry-exception-predicate: com.example.msorder.order.integrations.restaurant.MyRetryExceptionPredicate
+        result-predicate: com.example.msorder.order.integrations.restaurant.RestaurantMenuResultPredicate
+  circuitbreaker:
+    metrics:
+      enabled: true
+    instances:
+      cbrestaurant:
+        sliding-window-type: count-based
+          sliding-window-size: 20
+          minimum-number-of-calls: 10
+          failure-rate-threshold: 30
+          wait-duration-in-open-state: 10s
+          automatic-transition-from-open-to-half-open-enabled: false
+          permitted-number-of-calls-in-half-open-state: 10
+          slow-call-duration-threshold: 2000
+          slow-call-rate-threshold: 40

@@ -15,6 +15,6 @@ public class OrderManagementService {
 
     public String place(final Order order) throws MyFeignClientException {
         MenuPriceInfo menuPriceInfo = rmc.calculateMenu(order);
-        return "Menu Fiyatı: " + menuPriceInfo.getPrice() + " Port:" + menuPriceInfo.getPort();
+        return "Menü Fiyatı: " + menuPriceInfo.getPrice() + " Port:" + menuPriceInfo.getPort();
     }
 }
