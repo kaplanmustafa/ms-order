@@ -50,7 +50,7 @@ public class RestaurantMenuClient {
         Menu menu = new Menu();
         menu.setMeals(order.getMeals());
         menu.setMenuName("Menu: " + order.getName() + " " + order.getSurname());
-        return restTemplate.postForObject("http://RESTAURANT/api/v1/restaurant/menu/calculate",
+        return restTemplate.postForObject("http://RESTAURANT-API/api/v1/restaurant/menu/calculate",
                 menu,
                 MenuPriceInfo.class);
     }

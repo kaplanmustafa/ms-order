@@ -44,11 +44,11 @@ resilience4j:
     instances:
       cbrestaurant:
         sliding-window-type: count-based
-          sliding-window-size: 20
-          minimum-number-of-calls: 10
-          failure-rate-threshold: 30
-          wait-duration-in-open-state: 10s
-          automatic-transition-from-open-to-half-open-enabled: false
-          permitted-number-of-calls-in-half-open-state: 10
-          slow-call-duration-threshold: 2000
-          slow-call-rate-threshold: 40
+        sliding-window-size: 20
+        minimum-number-of-calls: 10
+        failure-rate-threshold: 30
+        wait-duration-in-open-state: 10s
+        automatic-transition-from-open-to-half-open-enabled: false
+        permitted-number-of-calls-in-half-open-state: 10
+        slow-call-duration-threshold: 2000
+        slow-call-rate-threshold: 40

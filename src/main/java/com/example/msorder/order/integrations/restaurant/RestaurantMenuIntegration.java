@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient("RESTAURANT")
+@FeignClient("RESTAURANT-API")
 public interface RestaurantMenuIntegration {
 
     @PostMapping("/api/v1/restaurant/menu/calculate")
